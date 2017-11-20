@@ -10,10 +10,6 @@ class App extends Component {
     this.state = {tree: testTree}
   }
 
-  sayHello(name) {
-    return "Oh, hi " + name;
-  }
-
   render() {
     return (
       <div>
