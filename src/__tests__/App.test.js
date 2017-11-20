@@ -13,6 +13,5 @@ it('should render a TreeNode', () => {
   let app = shallow(<App />);
   let treeNode = app.find(TreeNode);
 
-  console.log(treeNode.getElement());
   expect(treeNode).not.toBeNull();
 });
