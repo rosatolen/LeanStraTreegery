@@ -1,17 +1,18 @@
 import React from 'react';
+import './App.css';
 
 export const TreeNode = (props) => {
-    let childStyle = {
-        margin: "0 0 0 20px"
-    };
+    let onNameClicked = () => {
+        props.onNodeClick(props.node);
+    }
 
     return (
         <div>
-            {props.node.name}: &nbsp; {props.node.KPI.join(', ')}
+            <a onClick={onNameClicked} className="Clickable">{props.node.name}</a>: &nbsp; {props.node.KPI.join(', ')}
             {props.node.children.map((childNode) => {
                     return (
-                        <div style={childStyle} key={childNode.name}>
-                            <TreeNode node={childNode}/>
+                        <div key={childNode.name} className="ChildNode">
+                            <TreeNode node={childNode} onNodeClick={props.onNodeClick}/>
                         </div>
                     );
                 })
