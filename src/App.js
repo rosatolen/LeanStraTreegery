@@ -7,6 +7,7 @@ import './App.css';
 */
 import testTree from './testTree.json';
 import { TreeNode } from './TreeNode';
+import TreeVis from './TreeVis';
 
 class App extends Component {
   constructor() {
@@ -58,6 +59,7 @@ class App extends Component {
         </div>
         {this.showGoBackButton()}
         <TreeNode node={this.state.currentNode} onNodeClick={this.updateCurrentNode}/>
+        <TreeVis />
       </div>
     );
   }
