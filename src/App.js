@@ -1,36 +1,31 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
 import logo from './logo.svg';
 import './App.css';
-/* The below line is laziness.
-   The initial state should be read from a datastore, and passed in as a prop to the App component.
-   TODO: add react-redux to manage app state.
-*/
-import testTree from './testTree.json';
 import { TreeNode } from './TreeNode';
 
-class App extends Component {
-  constructor() {
+export class App extends Component {
+  constructor(props) {
     super();
     this.state = {
-      tree: testTree,
-      currentNode: testTree,
-      previousNodes: []
+      currentRootNode: props.rootNodeID,
+      previousRootNodes: []
     }
   }
 
-  updateCurrentNode = (newNode) => {
-    if(newNode !== this.state.currentNode) {
-      this.state.previousNodes.push(this.state.currentNode);
+  updateRootNode = (newRootID) => {
+    if(newRootID !== this.state.currentRootNode) {
+      this.state.previousRootNodes.push(this.state.currentRootNode);
       this.setState({
-        currentNode: newNode
+        currentRootNode: newRootID
       });
     }
   };
 
   goBack = () => {
-    if(this.state.previousNodes.length !== 0) {
+    if(this.state.previousRootNodes.length !== 0) {
       this.setState({
-        currentNode: this.state.previousNodes.pop()
+        currentRootNode: this.state.previousRootNodes.pop()
       });
     }
   }
@@ -41,7 +36,7 @@ class App extends Component {
         <span onClick={this.goBack} className="Clickable">Go Back</span>
       </div>
     );
-    return this.state.previousNodes.length > 0 ? button : null;
+    return this.state.previousRootNodes.length > 0 ? button : null;
   }
 
   render() {
@@ -57,10 +52,17 @@ class App extends Component {
           </p>
         </div>
         {this.showGoBackButton()}
-        <TreeNode node={this.state.currentNode} onNodeClick={this.updateCurrentNode}/>
+        <TreeNode nodes={this.props.tree} rootNodeID={this.state.currentRootNode} onNodeClick={this.updateRootNode} />
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    tree: state.nodes,
+    rootNodeID: state.rootNodeID
+  }
+};
+
+export default connect(mapStateToProps, () => {return {}})(App);

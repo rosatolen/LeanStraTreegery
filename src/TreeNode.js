@@ -1,18 +1,21 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import './App.css';
 
-export const TreeNode = (props) => {
+export const TreeNode = ({nodes, rootNodeID, onNodeClick}) => {
+    let rootNode = nodes.find(node => node.id === rootNodeID) || {};
+
     let onNameClicked = () => {
-        props.onNodeClick(props.node);
+        onNodeClick(rootNodeID);
     }
 
     return (
         <div>
-            <a onClick={onNameClicked} className="Clickable">{props.node.name}</a>: &nbsp; {props.node.KPI.join(', ')}
-            {props.node.children.map((childNode) => {
+            <a onClick={onNameClicked} className="Clickable">{rootNode.title}</a>: &nbsp; {rootNode.KPI.join(', ')}
+            {nodes.filter(node => node.parentID === rootNodeID).map((childNode) => {
                     return (
-                        <div key={childNode.name} className="ChildNode">
-                            <TreeNode node={childNode} onNodeClick={props.onNodeClick}/>
+                        <div key={childNode.id} className="ChildNode">
+                            <TreeNode nodes={nodes} rootNodeID={childNode.id} onNodeClick={onNodeClick}/>
                         </div>
                     );
                 })
@@ -20,5 +23,11 @@ export const TreeNode = (props) => {
         </div>
     );
 }
+
+TreeNode.propTypes = {
+    nodes: PropTypes.array.isRequired,
+    rootNodeID: PropTypes.number.isRequired,
+    onNodeClick: PropTypes.func
+};
 
 export default TreeNode;
