@@ -1,0 +1,53 @@
+{
+    "nextNodeID": 7,
+    "rootNodeID": 1,
+    "nodes": [{
+            "id": 1,
+            "title": "Big Picture Goal",
+            "description": "",
+            "KPI": []
+        },
+        {
+            "id": 2,
+            "title": "Maximize Profit",
+            "description": "",
+            "KPI": [],
+            "parentID": 1
+        },
+        {
+            "id": 3,
+            "title": "Raise Prices",
+            "KPI": [
+                "Price Per Sale"
+            ],
+            "parentID": 2
+        },
+        {
+            "id": 4,
+            "title": "Lower Operating Costs",
+            "KPI": [
+                "Facility Costs",
+                "Equipment Costs",
+                "Storage Costs"
+            ],
+            "parentID": 2
+        },
+        {
+            "title": "Increase Users",
+            "id": 5,
+            "KPI": ["userCount"],
+            "parentID": 1,
+            "description": ""
+
+        },
+        {
+            "id": 6,
+            "title": "New Marketing Plan",
+            "KPI": [
+                "Ad Views"
+            ],
+            "parentID": 5,
+            "description": ""
+        }
+    ]
+}

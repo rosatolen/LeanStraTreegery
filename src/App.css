@@ -22,7 +22,21 @@
   font-size: large;
 }
 
+.Clickable {
+  text-decoration: underline;
+  font-weight: bold;
+  cursor: pointer;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+.ChildNode {
+  margin-left: 20px;
+}
+
+.NavButton {
+  margin-bottom: 20px;
 }
