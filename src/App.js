@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import logo from './logo.svg';
 import './App.css';
 import { TreeNode } from './TreeNode';
+import TreeVis from './TreeVis';
 
 export class App extends Component {
   constructor(props) {
@@ -53,6 +54,7 @@ export class App extends Component {
         </div>
         {this.showGoBackButton()}
         <TreeNode nodes={this.props.tree} rootNodeID={this.state.currentRootNode} onNodeClick={this.updateRootNode} />
+        <TreeVis nodes={this.props.tree} rootNodeID={this.state.currentRootNode} />
       </div>
     );
   }
