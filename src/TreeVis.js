@@ -9,7 +9,6 @@ class TreeVis extends Component {
                 nodes:  new vis.DataSet(props.nodes.map(node => {
                     return {...node, label: node.title}
                 })),
-                // create an array with edges
                 edges:  new vis.DataSet(this.getEdges(props.nodes))
             }
         };
@@ -27,14 +26,27 @@ class TreeVis extends Component {
             });
         });
 
-
         return edges;
     }
 
     createNetwork = (element) => {
         let options = {
             nodes: {
-                shape: 'box'
+                shape: 'box',
+                fixed: true
+            },
+            edges: {
+                chosen: false
+            },
+            layout: {
+                hierarchical: {
+                    sortMethod: "directed",
+                    nodeSpacing: 200,
+                    levelSeparation: 75
+                }
+            },
+            physics: {
+                enabled: false
             }
         }
         new vis.Network(element, this.state.data, options);
