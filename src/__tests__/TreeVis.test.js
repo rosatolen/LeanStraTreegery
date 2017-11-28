@@ -10,7 +10,7 @@ it('should render without crashing', () => {
     );
 });
 
-xit('should create vis nodes from the given nodes', () => {
+it('should create vis nodes from the given nodes', () => {
     let testNodes = [{
             "id": 1,
             "title": "Big Picture Goal",
@@ -27,7 +27,8 @@ xit('should create vis nodes from the given nodes', () => {
 
     let treeVis = shallow(<TreeVis nodes={testNodes} />).instance();
 
-    expect(treeVis.state.data.nodes[1]).toEqual({...testNodes[0], label: testNodes[0].title});
+    expect(treeVis.state.data.nodes.get(1)).not.toBeNull();
+    expect(treeVis.state.data.nodes.get(1)).toEqual({...testNodes[0], label: testNodes[0].title});
 });
 
 it('should create edges from the given nodes', () => {
