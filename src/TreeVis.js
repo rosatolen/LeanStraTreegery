@@ -1,20 +1,24 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import vis from 'vis';
 
 class TreeVis extends Component {
-    constructor(props) {
-        super();
-        this.state = {
-            data: {
-                nodes:  new vis.DataSet(props.nodes.map(node => {
+    componentWillReceiveProps = (nextProps) => {
+        if (nextProps.nodes !== this.props.nodes) {
+                this.network.setData(this.createDatasetFromNodes(nextProps.nodes));
+        }
+    }
+
+    createDatasetFromNodes = (nodes) => {
+        return {
+                nodes:  new vis.DataSet(nodes.map(node => {
                     return {...node, label: node.title}
                 })),
-                edges:  new vis.DataSet(this.getEdges(props.nodes))
-            }
-        };
-    };
+                edges:  new vis.DataSet(this.getEdges(nodes))
+            };
+    }
 
-    getEdges(nodes) {
+    getEdges = (nodes) => {
         let edges = [];
 
         nodes.forEach(node => {
@@ -49,7 +53,15 @@ class TreeVis extends Component {
                 enabled: false
             }
         }
-        new vis.Network(element, this.state.data, options);
+        let network = new vis.Network(element, this.createDatasetFromNodes(this.props.nodes), options);
+        network.on('select', (event) => {
+            if(event.nodes.length === 0) {
+                this.props.onNodeSelect(-1);
+            } else {
+                this.props.onNodeSelect(event.nodes[0]);
+            }
+        });
+        this.network = network;
     }
 
     render() {
@@ -59,6 +71,11 @@ class TreeVis extends Component {
             </div>
         );
     }
+}
+
+TreeVis.propTypes = {
+    nodes: PropTypes.array.isRequired,
+    onNodeSelect: PropTypes.func
 }
 
 export default TreeVis;

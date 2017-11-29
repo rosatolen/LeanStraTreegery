@@ -12,6 +12,7 @@ function nodeReducer(state, action) {
 
     switch (action.type) {
         case actions.ADD_NODE:
+        console.log('Adding new node')
             return {...state,
                 nodes: [...state.nodes,
                     {
@@ -43,6 +44,12 @@ function nodeReducer(state, action) {
             targetNode.description = action.description;
 
             return newState;
+
+        case actions.SELECT_NODE:
+            return {
+                ...state,
+                selectedNodeID: action.id
+            }
 
         default:
             return state;

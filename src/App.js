@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import logo from './logo.svg';
 import './App.css';
 import TreeVis from './TreeVis';
+import NodeForm from './NodeForm';
+import actions from './store/TreeActions';
 
 export class App extends Component {
   constructor(props) {
@@ -11,6 +13,14 @@ export class App extends Component {
       currentRootNode: props.rootNodeID,
       previousRootNodes: []
     }
+  }
+
+  onNodeSelected = (nodeID) => {
+    this.props.updateSelectedNode(nodeID);
+  }
+
+  addNode = (nodeInfo) => {
+    this.props.addNode(nodeInfo.title, nodeInfo.description, this.props.selectedNode);
   }
 
   render() {
@@ -25,7 +35,8 @@ export class App extends Component {
             To get started, edit <code>src/App.js</code> and save to reload.
           </p>
         </div>
-        <TreeVis nodes={this.props.tree} rootNodeID={this.state.currentRootNode} />
+        <NodeForm onSubmit={this.addNode}/>
+        <TreeVis nodes={this.props.tree} rootNodeID={this.state.currentRootNode} onNodeSelect={this.onNodeSelected} />
       </div>
     );
   }
@@ -34,8 +45,20 @@ export class App extends Component {
 const mapStateToProps = (state) => {
   return {
     tree: state.nodes,
-    rootNodeID: state.rootNodeID
+    rootNodeID: state.rootNodeID,
+    selectedNode: state.selectedNodeID
   }
 };
 
-export default connect(mapStateToProps, () => {return {}})(App);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateSelectedNode: (nodeID) => {
+      dispatch(actions.selectNode(nodeID));
+    },
+    addNode: (title, description, parentID) => {
+      dispatch(actions.addNode(title, description, parentID));
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

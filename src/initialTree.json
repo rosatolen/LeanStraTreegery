@@ -1,6 +1,7 @@
 {
     "nextNodeID": 7,
     "rootNodeID": 1,
+    "selectedNodeID": -1,
     "nodes": [{
             "id": 1,
             "title": "Big Picture Goal",

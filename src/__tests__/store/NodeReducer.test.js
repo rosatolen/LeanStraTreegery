@@ -151,3 +151,22 @@ it('should edit the title and description when EDIT_NODE action received', () =>
    expect(newState.nodes[0].description).toEqual('newDescription');
    expect(newState).not.toEqual(state);
 });
+
+it('should update the selectedNode when given a SELECT_NODE action', () => {
+   let state = {
+       selectedNodeID: -1,
+       nodes: [
+            {
+                id: 1,
+                title: 'node1',
+                description: 'description1',
+                parentID: undefined
+            }
+        ]
+    };
+
+   let newState = reducer(state, actions.selectNode(1));
+
+   expect(newState.selectedNodeID).toEqual(1);
+   expect(newState).not.toEqual(state);
+});

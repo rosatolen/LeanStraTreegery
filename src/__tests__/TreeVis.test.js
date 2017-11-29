@@ -10,7 +10,7 @@ it('should render without crashing', () => {
     );
 });
 
-it('should create vis nodes from the given nodes', () => {
+it('should create Vis datasets from the given nodes', () => {
     let testNodes = [{
             "id": 1,
             "title": "Big Picture Goal",
@@ -25,10 +25,37 @@ it('should create vis nodes from the given nodes', () => {
             "parentID": 1
         }];
 
-    let treeVis = shallow(<TreeVis nodes={testNodes} />).instance();
+    let treeVis = new TreeVis();
 
-    expect(treeVis.state.data.nodes.get(1)).not.toBeNull();
-    expect(treeVis.state.data.nodes.get(1)).toEqual({...testNodes[0], label: testNodes[0].title});
+    let data = treeVis.createDatasetFromNodes(testNodes);
+    expect(data.nodes.length).toEqual(2);
+    expect(data.nodes.get(1)).toEqual({...testNodes[0], label: testNodes[0].title});
+    expect(data.edges.length).toEqual(1);
+    expect(data.edges.get()[0]).toHaveProperty('from', 1);
+    expect(data.edges.get()[0]).toHaveProperty('to', 2);
+});
+
+it('should create add Vis nodes to the network from the given nodes', () => {
+    let testNodes = [{
+            "id": 1,
+            "title": "Big Picture Goal",
+            "description": "",
+            "KPI": []
+        },
+        {
+            "id": 2,
+            "title": "Maximize Profit",
+            "description": "",
+            "KPI": [],
+            "parentID": 1
+        }];
+
+    let treeVis = mount(<TreeVis nodes={testNodes} />).instance();
+
+    // There's no way to query the actual data in the network, so this test just makes sure that it's been added to it.
+    let nodePositions = treeVis.network.getPositions([1,2]);
+    expect(nodePositions['1']).toBeDefined();;
+    expect(nodePositions['2']).toBeDefined();;
 });
 
 it('should create edges from the given nodes', () => {
