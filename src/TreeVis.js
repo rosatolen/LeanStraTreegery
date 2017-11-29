@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import * as _ from 'lodash';
 import vis from 'vis';
 
 class TreeVis extends Component {
     componentWillReceiveProps = (nextProps) => {
-        if (nextProps.nodes !== this.props.nodes) {
-                this.network.setData(this.createDatasetFromNodes(nextProps.nodes));
+        if (!_.isEqual(nextProps.nodes, this.props.nodes)) {
+            this.network.setData(this.createDatasetFromNodes(nextProps.nodes));
         }
     }
 

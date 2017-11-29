@@ -79,3 +79,36 @@ it('should create edges from the given nodes', () => {
 
     expect(edges).toContainEqual({from: 1, to: 2});
 });
+
+it('should update the network dataset when new props are received', () => {
+    let testNodes = [{
+            "id": 1,
+            "title": "Big Picture Goal",
+            "description": "",
+            "KPI": []
+        },
+        {
+            "id": 2,
+            "title": "Maximize Profit",
+            "description": "",
+            "KPI": [],
+            "parentID": 1
+        }];
+
+    let treeVis = mount(<TreeVis nodes={[...testNodes]} />).instance();
+
+    let newNode = {
+            "id": 3,
+            "title": "Third Node",
+            "description": "",
+            "KPI": [],
+            "parentID": 2
+    };
+
+    treeVis.componentWillReceiveProps({nodes: [...testNodes, newNode]});
+
+    let nodePositions = treeVis.network.getPositions([1, 2, 3]);
+    expect(nodePositions['1']).toBeDefined();;
+    expect(nodePositions['2']).toBeDefined();;
+    expect(nodePositions['3']).toBeDefined();;
+});
