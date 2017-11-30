@@ -8,6 +8,9 @@ React was chosen as a common, well-supported framework for webapps. Also interes
 ## TravisCI and open source Github
 These were used to minimize as much pipeline setup as possible.
 
+## Testing Libraries
+JSDOM, Jest and enzyme. Jest comes with ReactJS. JSDOM can help test interaction with the app.
+
 ## Redux javascript library
 This was added to manage state
 
