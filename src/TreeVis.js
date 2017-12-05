@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import * as _ from 'lodash';
 import vis from 'vis';
+import './App.css';
 
 class TreeVis extends Component {
     componentWillReceiveProps = (nextProps) => {
@@ -71,7 +72,7 @@ class TreeVis extends Component {
     render() {
         return (
             <div>
-                <div ref={this.createNetwork} style={{width: '600px', height: '600px'}}/>
+                <div ref={this.createNetwork} className='tree'/>
             </div>
         );
     }
