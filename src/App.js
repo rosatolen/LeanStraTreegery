@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import logo from './logo.svg';
 import './App.css';
 import TreeVis from './TreeVis';
-import AddNodeForm from './AddNodeForm';
+import AddNodeModal from './AddNodeModal';
 import actions from './store/TreeActions';
 
 export class App extends Component {
@@ -11,7 +11,8 @@ export class App extends Component {
     super();
     this.state = {
       currentRootNode: props.rootNodeID,
-      previousRootNodes: []
+      previousRootNodes: [],
+      showAddNodeDialog: false
     }
   }
 
@@ -21,6 +22,14 @@ export class App extends Component {
 
   addNode = (nodeInfo) => {
     this.props.addNode(nodeInfo.title, nodeInfo.description, this.props.selectedNode);
+  }
+
+  toggleAddNodeDialog = () => {
+    this.setState({
+      showAddNodeDialog: !this.state.showAddNodeDialog
+    },() => {
+      console.log(this.state);
+    });
   }
 
   render() {
@@ -35,8 +44,8 @@ export class App extends Component {
             To get started, edit <code>src/App.js</code> and save to reload.
           </p>
         </div>
-        <AddNodeForm onSubmit={this.addNode}/>
-        <TreeVis nodes={this.props.tree} rootNodeID={this.state.currentRootNode} onNodeSelect={this.onNodeSelected} />
+        <TreeVis nodes={this.props.tree} rootNodeID={this.state.currentRootNode} onNodeSelect={this.onNodeSelected} onNodeDoubleClick={this.toggleAddNodeDialog}/>
+        <AddNodeModal isOpen={this.state.showAddNodeDialog} onClose={this.toggleAddNodeDialog} onSubmit={this.addNode}/>
       </div>
     );
   }

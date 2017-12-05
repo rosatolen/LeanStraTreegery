@@ -35,6 +35,10 @@ class TreeVis extends Component {
     }
 
     createNetwork = (element) => {
+        if(!element) {
+            return;
+        }
+
         let options = {
             nodes: {
                 shape: 'box',
@@ -55,11 +59,10 @@ class TreeVis extends Component {
             }
         }
         let network = new vis.Network(element, this.createDatasetFromNodes(this.props.nodes), options);
-        network.on('select', (event) => {
-            if(event.nodes.length === 0) {
-                this.props.onNodeSelect(-1);
-            } else {
+        network.on('doubleClick', (event) => {
+            if(event.nodes.length !== 0) {
                 this.props.onNodeSelect(event.nodes[0]);
+                this.props.onNodeDoubleClick();
             }
         });
         this.network = network;
@@ -76,7 +79,8 @@ class TreeVis extends Component {
 
 TreeVis.propTypes = {
     nodes: PropTypes.array.isRequired,
-    onNodeSelect: PropTypes.func
+    onNodeSelect: PropTypes.func,
+    onNodeDoubleClick: PropTypes.func
 }
 
 export default TreeVis;

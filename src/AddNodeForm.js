@@ -33,7 +33,7 @@ class AddNodeForm extends React.Component {
 
     render = () => {
         return (
-            <form id='addAddNodeForm' onSubmit={this.onSubmit}>
+            <form id='addAddNodeForm' onSubmit={this.onSubmit} className={this.props.className}>
                 <div>
                     <label>
                         Title <input id='nodeTitle' type="text" name='title' value={this.state.title} onChange={this.onFieldChange}/>

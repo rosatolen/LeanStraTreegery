@@ -12,7 +12,6 @@ function nodeReducer(state, action) {
 
     switch (action.type) {
         case actions.ADD_NODE:
-        console.log('Adding new node')
             return {...state,
                 nodes: [...state.nodes,
                     {
