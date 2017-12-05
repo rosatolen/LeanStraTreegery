@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-class NodeForm extends React.Component {
+class AddNodeForm extends React.Component {
 
     constructor(props) {
         super();
@@ -21,13 +21,19 @@ class NodeForm extends React.Component {
     }
 
     onSubmit = (event) => {
-        this.props.onSubmit(this.state);
+        if(this.state.title.length > 0) {
+            this.props.onSubmit(this.state);
+            this.setState({
+                title: '',
+                description: ''
+            });
+        }
         event.preventDefault();
     }
 
     render = () => {
         return (
-            <form onSubmit={this.onSubmit}>
+            <form id='addAddNodeForm' onSubmit={this.onSubmit}>
                 <div>
                     <label>
                         Title <input id='nodeTitle' type="text" name='title' value={this.state.title} onChange={this.onFieldChange}/>
@@ -46,8 +52,8 @@ class NodeForm extends React.Component {
     }
 }
 
-NodeForm.propTypes = {
+AddNodeForm.propTypes = {
     onSubmit: PropTypes.func
 }
 
-export default NodeForm;
+export default AddNodeForm;

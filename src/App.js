@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import logo from './logo.svg';
 import './App.css';
 import TreeVis from './TreeVis';
-import NodeForm from './NodeForm';
+import AddNodeForm from './AddNodeForm';
 import actions from './store/TreeActions';
 
 export class App extends Component {
@@ -35,7 +35,7 @@ export class App extends Component {
             To get started, edit <code>src/App.js</code> and save to reload.
           </p>
         </div>
-        <NodeForm onSubmit={this.addNode}/>
+        <AddNodeForm onSubmit={this.addNode}/>
         <TreeVis nodes={this.props.tree} rootNodeID={this.state.currentRootNode} onNodeSelect={this.onNodeSelected} />
       </div>
     );
