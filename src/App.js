@@ -9,7 +9,6 @@ export class App extends Component {
   constructor(props) {
     super();
     this.state = {
-      currentRootNode: props.rootNodeID,
       previousRootNodes: [],
       showAddNodeDialog: false
     }
@@ -26,16 +25,23 @@ export class App extends Component {
   toggleAddNodeDialog = () => {
     this.setState({
       showAddNodeDialog: !this.state.showAddNodeDialog
-    },() => {
-      console.log(this.state);
     });
   }
 
   render() {
     return (
       <div>
-        <TreeVis nodes={this.props.tree} rootNodeID={this.state.currentRootNode} onNodeSelect={this.onNodeSelected} onNodeDoubleClick={this.toggleAddNodeDialog}/>
-        <AddNodeModal isOpen={this.state.showAddNodeDialog} onClose={this.toggleAddNodeDialog} onSubmit={this.addNode}/>
+        <TreeVis
+          nodes={this.props.tree}
+          onNodeSelect={this.onNodeSelected}
+          onNodeDoubleClick={this.toggleAddNodeDialog}
+        />
+        <AddNodeModal
+          isOpen={this.state.showAddNodeDialog}
+          onClose={this.toggleAddNodeDialog}
+          onSubmit={this.addNode}
+          parentNodeId={this.props.selectedNode}
+        />
       </div>
     );
   }
@@ -44,7 +50,6 @@ export class App extends Component {
 const mapStateToProps = (state) => {
   return {
     tree: state.nodes,
-    rootNodeID: state.rootNodeID,
     selectedNode: state.selectedNodeID
   }
 };
