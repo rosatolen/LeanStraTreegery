@@ -44,6 +44,12 @@ function nodeReducer(state, action) {
 
             return newState;
 
+        case actions.SELECT_NODE:
+            return {
+                ...state,
+                selectedNodeID: action.id
+            }
+
         default:
             return state;
     }
