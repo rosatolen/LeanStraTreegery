@@ -30,7 +30,7 @@ it('should get a node with a given id', () => {
     expect(modal.instance().getNodeWithId(1)).toEqual(nodes[1]);
 });
 
-it('should update state when given a new parentId', () => {
+it('should update state when given a new parentID', () => {
     let nodes = [
         {
             id: 0,

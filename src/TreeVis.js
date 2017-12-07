@@ -13,21 +13,48 @@ class TreeVis extends Component {
     }
 
     createDatasetFromNodes = (nodes) => {
+        let nodeSet = new vis.DataSet();
+        nodes.map(node => {
+            this.addNodeToDataset(node, nodeSet)
+        });
         return {
-                nodes:  new vis.DataSet(nodes.map(node => {
-                    return this.createVisNode(node)
-                })),
+                nodes:  nodeSet,
                 edges:  new vis.DataSet(this.getEdges(nodes))
             };
     }
 
-    createVisNode = (node) => {
-        return {
+    addNodeToDataset = (node, nodeSet) => {
+        let treeNode = {
             id: node.id,
             label: LabelFormatter.formatNodeLabel(node),
             font: {
                 multi: 'html'
-            }
+            },
+            group: this.getNodeGroup(node, nodeSet)
+        }
+        nodeSet.add(treeNode);
+    }
+
+    getNodeGroup = (node, nodeSet) => {
+        let parentGroup = undefined;
+        if(node.parentID) {
+            let parentNode = nodeSet.get(node.parentID);
+            parentGroup = parentNode.group;
+        }
+
+        switch(parentGroup) {
+            case 'vision':
+                return 'goal';
+            case 'goal':
+                return 'bet';
+            case 'bet':
+                return 'initiative';
+            case 'initiative':
+                return undefined;
+            case undefined:
+                return 'vision';
+            default:
+                return;
         }
     }
 
@@ -70,6 +97,20 @@ class TreeVis extends Component {
             },
             physics: {
                 enabled: false
+            },
+            groups: {
+                vision: {
+                    color: 'rgba(36, 229, 97, 1)'
+                },
+                goal: {
+                    color: 'rgba(36, 229, 97, .7)'
+                },
+                bet: {
+                    color: 'rgba(36, 229, 97, .4)'
+                },
+                initiative: {
+                    color: 'rgba(36, 229, 97, .1)'
+                }
             }
         }
         let network = new vis.Network(element, this.createDatasetFromNodes(this.props.nodes), options);
