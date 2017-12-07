@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import * as _ from 'lodash';
 import vis from 'vis';
 import './App.css';
+import LabelFormatter from './LabelFormatter';
 
 class TreeVis extends Component {
     componentWillReceiveProps = (nextProps) => {
@@ -14,10 +15,20 @@ class TreeVis extends Component {
     createDatasetFromNodes = (nodes) => {
         return {
                 nodes:  new vis.DataSet(nodes.map(node => {
-                    return {...node, label: node.title}
+                    return this.createVisNode(node)
                 })),
                 edges:  new vis.DataSet(this.getEdges(nodes))
             };
+    }
+
+    createVisNode = (node) => {
+        return {
+            id: node.id,
+            label: LabelFormatter.formatNodeLabel(node),
+            font: {
+                multi: 'html'
+            }
+        }
     }
 
     getEdges = (nodes) => {
@@ -43,7 +54,9 @@ class TreeVis extends Component {
         let options = {
             nodes: {
                 shape: 'box',
-                fixed: true
+                fixed: {
+                    y: true
+                }
             },
             edges: {
                 chosen: false

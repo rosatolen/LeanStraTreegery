@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { shallow, mount } from 'enzyme';
 import TreeVis from '../TreeVis';
+import LabelFormatter from '../LabelFormatter';
 
 it('should render without crashing', () => {
     ReactDOM.render(
@@ -14,14 +15,12 @@ it('should create Vis datasets from the given nodes', () => {
     let testNodes = [{
             "id": 1,
             "title": "Big Picture Goal",
-            "description": "",
-            "KPI": []
+            "description": ""
         },
         {
             "id": 2,
             "title": "Maximize Profit",
             "description": "",
-            "KPI": [],
             "parentID": 1
         }];
 
@@ -29,7 +28,13 @@ it('should create Vis datasets from the given nodes', () => {
 
     let data = treeVis.createDatasetFromNodes(testNodes);
     expect(data.nodes.length).toEqual(2);
-    expect(data.nodes.get(1)).toEqual({...testNodes[0], label: testNodes[0].title});
+    expect(data.nodes.get(1)).toEqual({
+        id: 1,
+        label: LabelFormatter.formatNodeLabel(testNodes[0]),
+        font: {
+            multi: 'html'
+        }
+    });
     expect(data.edges.length).toEqual(1);
     expect(data.edges.get()[0]).toHaveProperty('from', 1);
     expect(data.edges.get()[0]).toHaveProperty('to', 2);
@@ -39,14 +44,12 @@ it('should create add Vis nodes to the network from the given nodes', () => {
     let testNodes = [{
             "id": 1,
             "title": "Big Picture Goal",
-            "description": "",
-            "KPI": []
+            "description": ""
         },
         {
             "id": 2,
             "title": "Maximize Profit",
             "description": "",
-            "KPI": [],
             "parentID": 1
         }];
 
@@ -62,14 +65,12 @@ it('should create edges from the given nodes', () => {
     let testNodes = [{
             "id": 1,
             "title": "Big Picture Goal",
-            "description": "",
-            "KPI": []
+            "description": ""
         },
         {
             "id": 2,
             "title": "Maximize Profit",
             "description": "",
-            "KPI": [],
             "parentID": 1
         }];
 
@@ -84,14 +85,12 @@ it('should update the network dataset when new props are received', () => {
     let testNodes = [{
             "id": 1,
             "title": "Big Picture Goal",
-            "description": "",
-            "KPI": []
+            "description": ""
         },
         {
             "id": 2,
             "title": "Maximize Profit",
             "description": "",
-            "KPI": [],
             "parentID": 1
         }];
 
@@ -101,7 +100,6 @@ it('should update the network dataset when new props are received', () => {
             "id": 3,
             "title": "Third Node",
             "description": "",
-            "KPI": [],
             "parentID": 2
     };
 

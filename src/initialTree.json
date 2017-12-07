@@ -4,50 +4,37 @@
     "nodes": [{
             "id": 1,
             "title": "Big Picture Goal",
-            "description": "",
-            "KPI": []
+            "description": ""
         },
         {
             "id": 2,
             "title": "Maximize Profit",
-            "description": "",
-            "KPI": [],
+            "description": "Long and multi-line description of this node\nThis description should be formatted differently than the title...",
             "parentID": 1
         },
         {
             "id": 3,
             "title": "Raise Prices",
-            "KPI": [
-                "Price Per Sale"
-            ],
+            "description": "",
             "parentID": 2
         },
         {
             "id": 4,
             "title": "Lower Operating Costs",
-            "KPI": [
-                "Facility Costs",
-                "Equipment Costs",
-                "Storage Costs"
-            ],
+            "description": "",
             "parentID": 2
         },
         {
-            "title": "Increase Users",
             "id": 5,
-            "KPI": ["userCount"],
-            "parentID": 1,
-            "description": ""
-
+            "title": "Increase Users",
+            "description": "",
+            "parentID": 1
         },
         {
             "id": 6,
             "title": "New Marketing Plan",
-            "KPI": [
-                "Ad Views"
-            ],
-            "parentID": 5,
-            "description": ""
+            "description": "",
+            "parentID": 5
         }
     ]
 }

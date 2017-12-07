@@ -41,7 +41,7 @@ class AddNodeForm extends React.Component {
                 </div>
                 <div>
                     <label>
-                        Description <input id='nodeDescription' type="text" name='description' value={this.state.description} onChange={this.onFieldChange}/>
+                        Description <textarea id='nodeDescription' type="text" name='description' value={this.state.description} onChange={this.onFieldChange}/>
                     </label>
                 </div>
                 <div>
