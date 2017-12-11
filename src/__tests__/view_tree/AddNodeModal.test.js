@@ -76,7 +76,7 @@ it('should call onSubmit and onClose callbacks when given form data', () => {
         />
     );
 
-    modal.instance().onFormSubmitted(formData);
+    modal.instance().onFormSubmit(formData);
 
     expect(onSubmit).toHaveBeenCalledWith(formData);
     expect(onClose).toHaveBeenCalled();

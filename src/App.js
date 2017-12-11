@@ -41,21 +41,24 @@ export class App extends Component {
       </div>
     );
     let treeVis = (
-        <TreeVis
-          nodes={this.props.tree}
-          onNodeSelect={this.onNodeSelected}
-          onNodeDoubleClick={this.toggleAddNodeDialog}
-        />
+      <TreeVis
+        nodes={this.props.tree}
+        onNodeSelect={this.onNodeSelected}
+        onNodeDoubleClick={this.toggleAddNodeDialog}
+      />
     );
+    let addNodeModal = (
+      <AddNodeModal
+        onClose={this.toggleAddNodeDialog}
+        onSubmit={this.addNode}
+        parentNodeId={this.props.selectedNode}
+      />
+    );
+
     return (
       <div>
-        {this.props.tree.length === 0 ? createTreeButton : treeVis}
-        <AddNodeModal
-          isOpen={this.state.showAddNodeDialog}
-          onClose={this.toggleAddNodeDialog}
-          onSubmit={this.addNode}
-          parentNodeId={this.props.selectedNode}
-        />
+        { this.props.tree.length === 0 ? createTreeButton : treeVis }
+        { this.state.showAddNodeDialog ? addNodeModal : null }
       </div>
     );
   }

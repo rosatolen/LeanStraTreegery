@@ -12,7 +12,7 @@ export class AddNodeModal extends React.Component {
         }
     }
 
-    onFormSubmitted = (formData) => {
+    onFormSubmit = (formData) => {
         if(formData) {
             this.props.onSubmit(formData);
             this.props.onClose();
@@ -35,22 +35,19 @@ export class AddNodeModal extends React.Component {
     }
 
     render = () => {
-        let modal = (
+        return (
                 <div className="backdrop">
                     <div className="modal">
                         <div>Add to {this.state.parentNode.title} </div>
-                        <AddNodeForm onSubmit={this.onFormSubmitted}/>
+                        <AddNodeForm onSubmit={this.onFormSubmit}/>
                         <button onClick={this.props.onClose}>Close</button>
                     </div>
                 </div>
         );
-
-        return this.props.isOpen ? modal : null;
     }
 }
 
 AddNodeModal.propTypes = {
-    isOpen: PropTypes.bool.isRequired,
     onClose: PropTypes.func,
     onSubmit: PropTypes.func.isRequired,
     parentNodeId: PropTypes.number.isRequired
