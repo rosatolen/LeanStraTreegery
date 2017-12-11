@@ -1,6 +1,6 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-import ConnectedAddNodeModal, {AddNodeModal} from '../AddNodeModal';
+import ConnectedAddNodeModal, {AddNodeModal} from '../../view_tree/AddNodeModal';
 
 it('should get a node with a given id', () => {
     let nodes = [

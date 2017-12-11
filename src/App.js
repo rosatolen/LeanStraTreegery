@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import './App.css';
-import TreeVis from './TreeVis';
-import AddNodeModal from './AddNodeModal';
+import TreeVis from './view_tree/TreeVis';
+import AddNodeModal from './view_tree/AddNodeModal';
 import actions from './store/TreeActions';
 
 export class App extends Component {

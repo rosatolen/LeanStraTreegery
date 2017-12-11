@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import AddNodeForm from './AddNodeForm';
-import './App.css';
+import '../App.css';
 
 export class AddNodeModal extends React.Component {
     constructor(props) {

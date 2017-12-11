@@ -4,7 +4,7 @@ import {Provider} from 'react-redux';
 import { shallow, mount } from 'enzyme';
 import store from '../store/AppStore';
 import ConnectedApp, {App} from '../App';
-import TreeVis from '../TreeVis';
+import TreeVis from '../view_tree/TreeVis';
 
 let nodes;
 beforeEach(() => {

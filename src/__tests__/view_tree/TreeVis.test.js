@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { shallow, mount } from 'enzyme';
-import TreeVis from '../TreeVis';
-import LabelFormatter from '../LabelFormatter';
+import TreeVis from '../../view_tree/TreeVis';
+import LabelFormatter from '../../view_tree/LabelFormatter';
 
 it('should render without crashing', () => {
     ReactDOM.render(

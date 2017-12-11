@@ -1,6 +1,6 @@
 import React from 'react';
 import {shallow, mount} from 'enzyme';
-import AddNodeForm from '../AddNodeForm';
+import AddNodeForm from '../../view_tree/AddNodeForm';
 
 it('should update state when fields are edited', () => {
     let addNodeForm = shallow(<AddNodeForm />);

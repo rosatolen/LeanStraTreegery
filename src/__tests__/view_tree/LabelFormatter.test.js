@@ -1,5 +1,5 @@
 import React from 'react';
-import LabelFormatter from '../LabelFormatter';
+import LabelFormatter from '../../view_tree/LabelFormatter';
 
 it('should return a node title in bold', () => {
     let node = {

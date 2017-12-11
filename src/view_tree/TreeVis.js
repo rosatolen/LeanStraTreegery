@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import * as _ from 'lodash';
 import vis from 'vis';
-import './App.css';
+import '../App.css';
 import LabelFormatter from './LabelFormatter';
 
 class TreeVis extends Component {
@@ -14,7 +14,7 @@ class TreeVis extends Component {
 
     createDatasetFromNodes = (nodes) => {
         let nodeSet = new vis.DataSet();
-        nodes.map(node => {
+        nodes.forEach(node => {
             this.addNodeToDataset(node, nodeSet)
         });
         return {
