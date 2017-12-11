@@ -126,6 +126,21 @@ it('should assign vision group when node has no parent id', () => {
     expect(data.nodes.get(1).group).toEqual('vision');
 });
 
+it('should assign vision group when node has parent id < 0', () => {
+    let node = {
+            "id": 1,
+            "title": "Vision Node",
+            "description": "",
+            "parentID": -1
+    };
+
+    let treeVis = new TreeVis();
+
+    let data = treeVis.createDatasetFromNodes([node]);
+
+    expect(data.nodes.get(1).group).toEqual('vision');
+});
+
 it('should assign goal group when node parent is in vision group', () => {
     let visionNode = {
             "id": 1,

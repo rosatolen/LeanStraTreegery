@@ -26,9 +26,18 @@ it('should render without crashing', () => {
   );
 });
 
-it('should render a TreeVis component', () => {
+it('should render a TreeVis component when given a tree', () => {
   let app = shallow(<App tree={nodes}/>);
   let treeVis = app.find(TreeVis);
 
   expect(treeVis.exists()).toBe(true);
+});
+
+it('should show Create Tree button when the tree is empty', () => {
+  let app = shallow(<App tree={[]}/>);
+  let treeVis = app.find(TreeVis);
+  let createTreeButton = app.find('button');
+
+  expect(treeVis.exists()).toBe(false);
+  expect(createTreeButton.text()).toBe('Create a tree');
 });

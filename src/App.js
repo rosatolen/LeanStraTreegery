@@ -28,14 +28,28 @@ export class App extends Component {
     });
   }
 
+  createTree = (event) => {
+    this.toggleAddNodeDialog();
+    event.preventDefault();
+  }
+
   render() {
-    return (
+    let createTreeButton = (
       <div>
+        <div>It looks like you don't have a tree yet.</div>
+        <button onClick={this.createTree}>Create a tree</button>
+      </div>
+    );
+    let treeVis = (
         <TreeVis
           nodes={this.props.tree}
           onNodeSelect={this.onNodeSelected}
           onNodeDoubleClick={this.toggleAddNodeDialog}
         />
+    );
+    return (
+      <div>
+        {this.props.tree.length === 0 ? createTreeButton : treeVis}
         <AddNodeModal
           isOpen={this.state.showAddNodeDialog}
           onClose={this.toggleAddNodeDialog}

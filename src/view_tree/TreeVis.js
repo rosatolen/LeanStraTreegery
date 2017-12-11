@@ -37,12 +37,12 @@ class TreeVis extends Component {
 
     getNodeGroup = (node, nodeSet) => {
         let parentGroup = undefined;
-        if(node.parentID) {
+        if (node.parentID >= 0) {
             let parentNode = nodeSet.get(node.parentID);
             parentGroup = parentNode.group;
         }
 
-        switch(parentGroup) {
+        switch (parentGroup) {
             case 'vision':
                 return 'goal';
             case 'goal':
