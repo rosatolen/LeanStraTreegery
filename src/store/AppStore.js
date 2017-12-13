@@ -1,5 +1,5 @@
 import {createStore} from 'redux';
-import initialTree from '../initialTree.json';
+import initialState from './initialState.json';
 import reducers from './NodeReducer';
 
-export default createStore(reducers, initialTree);
+export default createStore(reducers, initialState);
