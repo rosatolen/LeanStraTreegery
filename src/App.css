@@ -1,44 +1,10 @@
-.App {
-  text-align: center;
+*, *:before, *:after {
+    box-sizing: border-box;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-.Clickable {
-  text-decoration: underline;
+.clickable {
   font-weight: bold;
   cursor: pointer;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-.ChildNode {
-  margin-left: 20px;
-}
-
-.NavButton {
-  margin-bottom: 20px;
 }
 
 .tree {
@@ -70,8 +36,40 @@
   margin-left: -150px;
   z-index: 9999;
   background: rgba(255, 255, 255, 0.5);
+  padding: 0px 10px;
 }
 
-/* .modal.button {
-  left: 100%
-} */
+.modal .header {
+  text-align: center;
+}
+
+.modal .closeButton {
+  margin-left: 100%;
+  margin-top: -5%;
+}
+
+.modal_contents {
+  width: 100%;
+}
+
+.modal_contents form {
+  margin-top: 10px;
+}
+
+.modal_contents input {
+  width: 100%;
+  margin: 5px 0px;
+}
+
+.modal_contents textarea {
+  width: 100%;
+  margin: 5px 0px;
+}
+
+.modal_contents input[type=submit] {
+  width: 100%;
+  padding: 5px 0px;
+  border-color: black;
+  background-color: rgb(8, 241, 8);
+  margin: 5px 0px;
+}

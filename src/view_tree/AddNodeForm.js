@@ -33,21 +33,17 @@ class AddNodeForm extends React.Component {
 
     render = () => {
         return (
-            <form id='addAddNodeForm' onSubmit={this.onSubmit} className={this.props.className}>
-                <div>
-                    <label>
-                        Title <input id='nodeTitle' type="text" name='title' value={this.state.title} onChange={this.onFieldChange}/>
-                    </label>
-                </div>
-                <div>
-                    <label>
-                        Description <textarea id='nodeDescription' type="text" name='description' value={this.state.description} onChange={this.onFieldChange}/>
-                    </label>
-                </div>
-                <div>
-                    <input type='submit' name='submit'/>
-                </div>
-            </form>
+            <div className={this.props.className}>
+                <form id='addAddNodeForm' onSubmit={this.onSubmit}>
+                    <label htmlFor='nodeTitle'>Title</label>
+                    <input id='nodeTitle' type="text" name='title' value={this.state.title} onChange={this.onFieldChange}/>
+
+                    <label htmlFor='nodeDescription'>Description</label>
+                    <textarea id='nodeDescription' type="text" name='description' value={this.state.description} onChange={this.onFieldChange}/>
+
+                    <input type='submit' name='submit' value="Add"/>
+                </form>
+            </div>
         );
     }
 }

@@ -10,7 +10,7 @@ export class App extends Component {
     super();
     this.state = {
       previousRootNodes: [],
-      showAddNodeDialog: false
+      showAddNodeDialog: true
     }
   }
 

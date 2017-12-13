@@ -35,12 +35,13 @@ export class AddNodeModal extends React.Component {
     }
 
     render = () => {
+        let headerText = this.state.parentNode.title ? `Add to ${this.state.parentNode.title}` : "Set a goal"
         return (
                 <div className="backdrop">
                     <div className="modal">
-                        <div>Add to {this.state.parentNode.title} </div>
-                        <AddNodeForm onSubmit={this.onFormSubmit}/>
-                        <button onClick={this.props.onClose}>Close</button>
+                        <div onClick={this.props.onClose} className={'closeButton clickable'}>X</div> 
+                        <div className={"header"}>{headerText}</div>
+                        <AddNodeForm onSubmit={this.onFormSubmit} className={"modal_contents"}/>
                     </div>
                 </div>
         );
