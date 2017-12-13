@@ -39,5 +39,5 @@ it('should show Create Tree button when the tree is empty', () => {
   let createTreeButton = app.find('button');
 
   expect(treeVis.exists()).toBe(false);
-  expect(createTreeButton.text()).toBe('Create a tree');
+  expect(createTreeButton.text()).toBe('Add a goal');
 });

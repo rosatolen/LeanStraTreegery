@@ -37,7 +37,7 @@ export class App extends Component {
     let createTreeButton = (
       <div>
         <div>It looks like you don't have a tree yet.</div>
-        <button onClick={this.createTree}>Create a tree</button>
+        <button onClick={this.createTree}>Add a goal</button>
       </div>
     );
     let treeVis = (
