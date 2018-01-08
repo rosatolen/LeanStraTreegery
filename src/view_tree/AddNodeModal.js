@@ -8,7 +8,7 @@ export class AddNodeModal extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            parentNode: {}
+            parentNode: this.getNodeWithId(props.parentNodeId)
         }
     }
 
@@ -23,7 +23,7 @@ export class AddNodeModal extends React.Component {
         let node = this.props.nodes.filter((node) => {
             return node.id === nodeId;
         });
-        return node[0];
+        return node[0] ? node[0] : {};
     }
 
     componentWillReceiveProps = (nextProps) => {
