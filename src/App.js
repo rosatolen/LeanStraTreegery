@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import './App.css';
 import TreeVis from './view_tree/TreeVis';
-import AddNodeModal from './view_tree/AddNodeModal';
 import actions from './store/TreeActions';
-import AddVisionModal from './view_tree/AddVisionModal';
+import AddVisionForm from './view_tree/AddVisionForm';
+import AddNodeForm from './view_tree/AddNodeForm';
+import FormModal from './view_tree/FormModal';
 
 export class App extends Component {
   constructor(props) {
@@ -22,7 +23,7 @@ export class App extends Component {
   }
 
   addNode = (nodeInfo) => {
-    this.props.addNode(nodeInfo.title, nodeInfo.description, this.props.selectedNode);
+    this.props.addNode(nodeInfo.title, nodeInfo.description, this.props.selectedNodeId);
   }
 
   toggleAddNodeDialog = () => {
@@ -51,6 +52,13 @@ export class App extends Component {
     this.props.setVision(visionFormBody.vision);
   }
 
+  getNodeWithId = (nodeId) => {
+    let node = this.props.tree.filter((node) => {
+        return node.id === nodeId;
+    });
+    return node[0];
+  }
+
   render() {
     let visionStatementHeader = <h1>{this.props.visionStatement}</h1>;
     let createVisionButton = (
@@ -72,18 +80,22 @@ export class App extends Component {
         onNodeDoubleClick={this.toggleAddNodeDialog}
       />
     );
+    let selectedNode = this.getNodeWithId(this.props.selectedNodeId); 
     let addNodeModal = (
-      <AddNodeModal
+      <FormModal
+        title={selectedNode ? `Add to ${selectedNode.title}` : "Set a goal"}
         onClose={this.toggleAddNodeDialog}
-        onSubmit={this.addNode}
-        parentNodeId={this.props.selectedNode}
-      />
+        onSubmit={this.addNode} >
+        <AddNodeForm/>
+      </FormModal>
     );
     let setVisionModal = (
-      <AddVisionModal
+      <FormModal
+        title="Vision Statement"
         onSubmit={this.setVision}
-        onClose={this.toggleSetVisionDialog}
-      /> 
+        onClose={this.toggleSetVisionDialog} >
+        <AddVisionForm/>
+      </FormModal> 
     );
 
     return (
@@ -99,14 +111,14 @@ export class App extends Component {
 
 App.propTypes = {
   tree: PropTypes.array.isRequired,
-  selectedNodeID: PropTypes.number,
+  selectedNodeId: PropTypes.number,
   visionStatement: PropTypes.string.isRequired
 }
 
 const mapStateToProps = (state) => {
   return {
     tree: state.nodes,
-    selectedNode: state.selectedNodeID,
+    selectedNodeId: state.selectedNodeID,
     visionStatement: state.visionStatement
   }
 };

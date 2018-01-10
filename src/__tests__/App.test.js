@@ -5,8 +5,9 @@ import { shallow } from 'enzyme';
 import store from '../store/AppStore';
 import ConnectedApp, {App} from '../App';
 import TreeVis from '../view_tree/TreeVis';
-import AddVisionModal from '../view_tree/AddVisionModal';
-import AddNodeModal from '../view_tree/AddNodeModal';
+import FormModal from '../view_tree/FormModal';
+import AddNodeForm from '../view_tree/AddNodeForm';
+import AddVisionForm from '../view_tree/AddVisionForm';
 
 let nodes;
 beforeEach(() => {
@@ -44,7 +45,7 @@ it('should show Add a goal button when the tree is empty', () => {
   expect(createTreeButton.exists()).toBe(true);
 });
 
-it('should show the Add Node modal when the Add a goal button is clicked', () => {
+it('should show a modal Add Node form when the Add a goal button is clicked', () => {
   let app = shallow(
     <App
       tree={[]}
@@ -58,9 +59,10 @@ it('should show the Add Node modal when the Add a goal button is clicked', () =>
     preventDefault: jest.fn()
   });
 
-  let addNodeModal = app.find(AddNodeModal);
+  let addNodeModal = app.find(FormModal);
 
   expect(addNodeModal.exists()).toBe(true);
+  expect(addNodeModal.find(AddNodeForm).exists()).toBe(true);
 });
 
 it('should display add vision statement button when statement is empty', () => {
@@ -107,9 +109,10 @@ it('should show the set vision modal when the Add a vision button is clicked', (
     preventDefault: jest.fn()
   });
 
-  let addVisionModal = app.find(AddVisionModal);
+  let addVisionModal = app.find(FormModal);
 
   expect(addVisionModal.exists()).toBe(true);
+  expect(addVisionModal.find(AddVisionForm).exists()).toBe(true);
 });
 
 it('should call the set vision action  when set vision form is submitted', () => {
@@ -129,4 +132,32 @@ it('should call the set vision action  when set vision form is submitted', () =>
   });
 
   expect(setVisionAction).toHaveBeenCalledWith("some vision statement");
+});
+
+it('should get the node corresponding to a given ID', () => {
+  let app = shallow(
+    <App
+      tree={nodes}
+      selectedNode={-1}
+      visionStatement={""}
+    />
+  );
+
+  let selectedNode = app.instance().getNodeWithId(1);
+
+  expect(selectedNode).toBe(nodes[0]);
+});
+
+it('should return an undefined node if the given ID cannot be found', () => {
+  let app = shallow(
+    <App
+      tree={nodes}
+      selectedNode={-1}
+      visionStatement={""}
+    />
+  );
+
+  let selectedNode = app.instance().getNodeWithId(15);
+
+  expect(selectedNode).toBeUndefined();
 });
