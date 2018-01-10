@@ -170,3 +170,16 @@ it('should update the selectedNode when given a SELECT_NODE action', () => {
    expect(newState.selectedNodeID).toEqual(1);
    expect(newState).not.toEqual(state);
 });
+
+it('should set the vision statement when given a SET_VISION action', () => {
+   let state = {
+       selectedNodeID: -1,
+       nodes: [],
+       visionStatement: ""
+    };
+
+    let newState = reducer(state, actions.setVision("some vision statement"));
+
+    expect(newState.visionStatement).toEqual("some vision statement");
+    expect(newState).not.toEqual(state);
+});
