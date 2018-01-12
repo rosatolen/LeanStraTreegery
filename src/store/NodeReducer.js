@@ -50,6 +50,12 @@ function nodeReducer(state, action) {
                 selectedNodeID: action.id
             }
 
+        case actions.SET_VISION:
+            return {
+                ...state,
+                visionStatement: action.vision
+            }; 
+
         default:
             return state;
     }
