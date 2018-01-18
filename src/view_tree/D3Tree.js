@@ -60,6 +60,40 @@ class D3Tree extends Component {
       .on('zoom', zoomAndTranslate);
 
     d3.select(element).call(zoomTranslate)
+    d3.selectAll(D3Node).call(zoomTranslate)
+  }
+
+  addNode = () => {
+    let newTree = { ...familyTreeData };
+
+    let offspring = {
+      name: "Dirt McGirt"
+    };
+
+    newTree.children.filter(child => {
+      if (child.name == 'Abel') {
+        if (!child.children) {
+          child.children = [];
+        }
+        child.children.push(offspring);
+      }
+    });
+
+    let newHierarchy = this.createHierarchyFrom(newTree);
+    this.setState({
+      familyTree: newHierarchy
+    });
+  }
+
+  deleteEnoch = () => {
+    let newTree = { ...familyTreeData };
+
+    newTree.children.find(child => child.name == "Awan").children = [];
+
+    let newHierarchy = this.createHierarchyFrom(newTree);
+    this.setState({
+      familyTree: newHierarchy
+    });
   }
 
   render() {
@@ -67,7 +101,10 @@ class D3Tree extends Component {
     let nodes = this.getNodeHtml();
     return (
       <div>
-        {/* <svg viewBox={`0 0 ${this.props.width - 2 * this.horizontalPadding} ${this.props.height - 2 * this.verticalPadding}`}> */}
+        <div>
+          <button onClick={this.addNode} > Add a person to Abel </button>
+          <button onClick={this.deleteEnoch} > Get rid of Enoch </button>
+        </div>
         <svg width={this.props.width} height={this.props.height} ref={this.addZoomTransform}>
           <g id="svgContents">
             {links}
