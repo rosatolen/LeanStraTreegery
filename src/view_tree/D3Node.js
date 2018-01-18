@@ -14,24 +14,27 @@ export default function D3Node(props) {
   let description = node.parent ? `${node.data.name} is the offspring of ${node.parent.data.name}.` : "No idea where this person sprang from";
 
   return (
-    <foreignObject x={node.x} y={node.y} height={height} width={width}>
-      <div>
-        <img
-          src="http://flagpedia.net/data/flags/mini/br.png"
-          width="31"
-          height="20"
-          alt="br"
-          style={{
-            margin: "0 5px 0 0"
-          }
-          }
-        />
-        <b>{node.data.name}</b>
-      </div>
-      <div>
-        {description}
-        <button onClick={onButtonClick}>It's a button</button>
-      </div>
-    </foreignObject>
+    <g>
+      <rect x={node.x - width / 2} y={node.y - height / 2} height={height} width={width} style={{ fill: "white", strokeWidth: 0.1, stroke: "black" }} />
+      <foreignObject x={node.x - width / 2} y={node.y - height / 2} height={height} width={width}>
+        <div>
+          <img
+            src="http://flagpedia.net/data/flags/mini/br.png"
+            width="31"
+            height="20"
+            alt="br"
+            style={{
+              margin: "0 5px 0 0"
+            }
+            }
+          />
+          <b>{node.data.name}</b>
+        </div>
+        <div>
+          {description}
+          <button onClick={onButtonClick}>It's a button</button>
+        </div>
+      </foreignObject>
+    </g>
   );
 }
