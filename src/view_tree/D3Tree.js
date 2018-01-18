@@ -1,7 +1,4 @@
 import React, { Component } from "react";
-import ReactDOMServer from "react-dom/server";
-import PropTypes from "prop-types";
-import * as _ from "lodash";
 import * as d3 from "d3";
 import "../App.css";
 import D3Node from './D3Node';
@@ -9,11 +6,11 @@ import * as familyTreeData from "./FamilyTree.json";
 
 class D3Tree extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
-    this.horizontalSize = 1000;
-    this.verticalSize = 1000;
+    this.horizontalSize = props.width;
+    this.verticalSize = props.height;
     this.horizontalPadding = 10;
     this.verticalPadding = 10;
     this.width = this.horizontalSize - 2 * this.horizontalPadding;
@@ -29,7 +26,6 @@ class D3Tree extends Component {
   createHierarchyFrom = data => {
     let tree = d3.tree()
       .size([this.width, this.height]);
-    // .nodeSize([100, 100]);
     return tree(d3.hierarchy(data));
   }
 
@@ -51,15 +47,29 @@ class D3Tree extends Component {
     });
   }
 
+  addZoomTransform = (element) => {
+    let zoomAndTranslate = () => {
+      console.log(d3.event.transform)
+      d3.select('g#svgContents')
+        .attr('transform', d3.event.transform);
+    }
+    let zoomTranslate = d3.zoom()
+      .on('zoom', zoomAndTranslate);
+
+    d3.select(element).call(zoomTranslate)
+  }
+
   render() {
     let links = this.getNodeLinks();
     let nodes = this.getNodeHtml();
     return (
       <div>
-        {/* <svg viewBox={`0 0 ${this.width} ${this.height}`}> */}
-        <svg width={this.props.width - 2 * this.horizontalPadding} height={this.props.height - 2 * this.verticalPadding}>
+        {/* <svg viewBox={`0 0 ${this.props.width - 2 * this.horizontalPadding} ${this.props.height - 2 * this.verticalPadding}`}> */}
+        <svg width={this.props.width} height={this.props.height} ref={this.addZoomTransform}>
+          <g id="svgContents">
           {links}
           {nodes}
+          </g>
         </svg>
       </div>
     );

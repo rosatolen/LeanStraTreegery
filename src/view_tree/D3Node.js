@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 
 export default function D3Node(props) {
 
@@ -12,6 +12,7 @@ export default function D3Node(props) {
   let height = props.height ? props.height : 170;
   let width = props.width ? props.width : 150;
   let description = node.parent ? `${node.data.name} is the offspring of ${node.parent.data.name}.` : "No idea where this person sprang from";
+
   return (
     <foreignObject x={node.x} y={node.y} height={height} width={width}>
       <div>
