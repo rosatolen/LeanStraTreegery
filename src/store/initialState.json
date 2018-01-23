@@ -2,5 +2,24 @@
     "nextNodeID": 1,
     "selectedNodeID": -1,
     "visionStatement": "",
-    "nodes": []
+    "nodes": [],
+    "tree": {
+        "title": "Eve",
+        "children": [
+            {
+                "title": "Cain"
+            },
+            {
+                "title": "Seth",
+                "children": [
+                    {
+                        "title": "Enos"
+                    },
+                    {
+                        "title": "Noam"
+                    }
+                ]
+            }
+        ]
+    }
 }
