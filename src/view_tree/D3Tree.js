@@ -70,14 +70,13 @@ class D3Tree extends Component {
       name: "Dirt McGirt"
     };
 
-    newTree.children.filter(child => {
-      if (child.name == 'Abel') {
+    newTree.children.filter(child => child.name === 'Abel')
+      .forEach(child => {
         if (!child.children) {
           child.children = [];
         }
         child.children.push(offspring);
-      }
-    });
+      });
 
     let newHierarchy = this.createHierarchyFrom(newTree);
     this.setState({
@@ -88,7 +87,7 @@ class D3Tree extends Component {
   deleteEnoch = () => {
     let newTree = { ...familyTreeData };
 
-    newTree.children.find(child => child.name == "Awan").children = [];
+    newTree.children.find(child => child.name === "Awan").children = [];
 
     let newHierarchy = this.createHierarchyFrom(newTree);
     this.setState({
