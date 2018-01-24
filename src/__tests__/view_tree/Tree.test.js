@@ -4,11 +4,15 @@ import Tree from '../../view_tree/Tree';
 import TreeNode from '../../view_tree/TreeNode';
 
 it('should render a node for each member of the tree', () => {
-  let treeData = {
+  let treeData = [
+    {
+      "id": 1,
       title: "root node",
-      children: []
+      description: "",
+      "parentID": null
     }
-  let tree = shallow(<Tree width={500} height={500} tree={treeData}/>);
+  ];
+  let tree = shallow(<Tree width={500} height={500} tree={treeData} />);
 
   let treeNodes = tree.find(TreeNode);
 
@@ -16,15 +20,21 @@ it('should render a node for each member of the tree', () => {
 });
 
 it('should render a link between a node and its child', () => {
-  let treeData = {
+  let treeData = [
+    {
+      "id": 1,
       title: "root node",
-      children: [
-        {
-          title: "child node"
-        }
-      ]
+      description: "",
+      "parentID": null
+    },
+    {
+      "id": 2,
+      title: "child node",
+      "description": "3iuejfjf7739030407ejhe",
+      "parentID": 1
     }
-  let tree = shallow(<Tree width={500} height={500} tree={treeData}/>);
+  ];
+  let tree = shallow(<Tree width={500} height={500} tree={treeData} />);
 
   let links = tree.find('path');
   let treeNodes = tree.find(TreeNode);
