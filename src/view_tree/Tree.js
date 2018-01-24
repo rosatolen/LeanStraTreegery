@@ -5,10 +5,10 @@ import TreeNode from './TreeNode';
 
 let Tree = (props) => {
 
-  let hierarchyData = d3.stratify().id(datum => datum.id).parentId(datum => datum.parentID)(props.tree);
-  let treeData = d3.tree().size([props.width, props.height])(hierarchyData);
   let nodeHeight = 100;
   let nodeWidth = 200;
+  let hierarchyData = d3.stratify().id(datum => datum.id).parentId(datum => datum.parentID)(props.tree);
+  let treeData = d3.tree().size([props.width, props.height - nodeHeight])(hierarchyData);
 
   let inflateNodes = (nodes) => {
     return nodes.map(nodeData => {
@@ -29,7 +29,7 @@ let Tree = (props) => {
 
       return (<path key={key} d={linkGenerator(link)} fill="none" stroke="black" />);
     });
-  }
+  };
 
   return (
     <div>
@@ -39,6 +39,6 @@ let Tree = (props) => {
       </svg>
     </div>
   );
-}
+};
 
 export default Tree;
