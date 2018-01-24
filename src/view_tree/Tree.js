@@ -5,7 +5,7 @@ import TreeNode from './TreeNode';
 
 let Tree = (props) => {
 
-  let hierarchyData = d3.hierarchy(props.tree);
+  let hierarchyData = d3.stratify().id(datum => datum.id).parentId(datum => datum.parentID)(props.tree);
   let treeData = d3.tree().size([props.width, props.height])(hierarchyData);
 
   let inflateNodes = (nodes) => {

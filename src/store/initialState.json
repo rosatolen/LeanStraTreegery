@@ -1,25 +1,6 @@
 {
     "nextNodeID": 1,
-    "selectedNodeID": -1,
+    "selectedNodeID": null,
     "visionStatement": "",
-    "nodes": [],
-    "tree": {
-        "title": "Eve",
-        "children": [
-            {
-                "title": "Cain"
-            },
-            {
-                "title": "Seth",
-                "children": [
-                    {
-                        "title": "Enos"
-                    },
-                    {
-                        "title": "Noam"
-                    }
-                ]
-            }
-        ]
-    }
+    "nodes": []
 }
