@@ -1,8 +1,9 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import Tree from '../../view_tree/Tree';
 import TreeNode from '../../view_tree/TreeNode';
 
+describe('Tree', () => {
 it('should render a node for each member of the tree', () => {
   let treeData = [
     {
@@ -41,4 +42,33 @@ it('should render a link between a node and its child', () => {
 
   expect(links.length).toEqual(1);
   expect(links.at(0).key()).toEqual("root node -> child node");
+});
+
+it('should call its select node and on doubleclick callbacks when a node is double clicked', () => {
+  let treeData = [
+    {
+      "id": 1,
+      title: "root node",
+      description: "",
+      "parentID": null
+    }
+  ];
+  let nodeSelectListener = jest.fn();
+  let doubleClickListener = jest.fn();
+  let tree = mount(
+    <Tree
+      width={500}
+      height={500}
+      tree={treeData}
+      onNodeSelect={nodeSelectListener}
+      onNodeDoubleClick={doubleClickListener}
+    />
+  );
+
+  let treeNode = tree.find(TreeNode);
+  treeNode.simulate('doubleClick');
+
+  expect(nodeSelectListener).toHaveBeenCalledWith(1);
+  expect(doubleClickListener).toHaveBeenCalled();
+});
 });

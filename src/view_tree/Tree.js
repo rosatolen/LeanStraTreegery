@@ -10,9 +10,22 @@ let Tree = (props) => {
   let hierarchyData = d3.stratify().id(datum => datum.id).parentId(datum => datum.parentID)(props.tree);
   let treeData = d3.tree().size([props.width, props.height - nodeHeight])(hierarchyData);
 
+  let onNodeDoubleClick = (nodeData) => {
+    props.onNodeSelect(nodeData.id);
+    props.onNodeDoubleClick();
+  };
+
   let inflateNodes = (nodes) => {
-    return nodes.map(nodeData => {
-      return (<TreeNode key={nodeData.data.title} width={nodeWidth} height={nodeHeight} data={nodeData} />);
+    return nodes.map(node => {
+      return (
+        <TreeNode
+          key={node.data.title}
+          width={nodeWidth}
+          height={nodeHeight}
+          data={node}
+          doubleClickListener={onNodeDoubleClick}
+        />
+      );
     });
   };
 
