@@ -1,27 +1,39 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../App.css';
 
 function TreeNode(props) {
   let nodeData = props.data;
 
   return (
-    <foreignObject
-      onDoubleClick={props.doubleClickListener.bind(this, nodeData.data)}
+    <g
       width={props.width}
       height={props.height}
-      x={nodeData.x - props.width / 2}
-      y={nodeData.y} >
-      <div>
-        {nodeData.data.title}
-      </div>
-    </foreignObject>
+      onDoubleClick={props.doubleClickListener.bind(this, nodeData.data)}
+      className={'tree_node'} >
+      <rect
+        width={props.width}
+        height={props.height}
+        x={nodeData.x - props.width / 2}
+        y={nodeData.y}
+      />
+      <foreignObject
+        width={props.width}
+        height={props.height}
+        x={nodeData.x - props.width / 2}
+        y={nodeData.y} >
+        <div className={'title'}>
+          {nodeData.data.title}
+        </div>
+      </foreignObject>
+    </g>
   );
 }
 
 TreeNode.defaultProps = {
   width: 200,
   height: 100,
-  doubleClickListener: () => {}
+  doubleClickListener: () => { }
 };
 TreeNode.propTypes = {
   width: PropTypes.number,
