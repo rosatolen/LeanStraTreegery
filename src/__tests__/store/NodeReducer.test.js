@@ -155,7 +155,7 @@ describe('NodeReducer', () => {
 
   it('should update the selectedNode when given a SELECT_NODE action', () => {
     let state = {
-      selectedNodeID: -1,
+      selectedNodeID: null,
       nodes: [
         {
           id: 1,
@@ -174,7 +174,7 @@ describe('NodeReducer', () => {
 
   it('should set the vision statement when given a SET_VISION action', () => {
     let state = {
-      selectedNodeID: -1,
+      selectedNodeID: null,
       nodes: [],
       visionStatement: ""
     };
