@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import propTypes from 'prop-types';
 import * as d3 from 'd3';
 import TreeNode from './TreeNode';
 
@@ -90,5 +91,13 @@ class Tree extends Component {
     );
   }
 };
+
+Tree.PropTypes = {
+  width: propTypes.number,
+  height: propTypes.number,
+  tree: propTypes.array,
+  onNodeSelect: propTypes.func,
+  onNodeDoubleClick: propTypes.func
+}
 
 export default Tree;

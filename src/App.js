@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import './App.css';
-import TreeVis from './view_tree/TreeVis';
 import actions from './store/TreeActions';
 import AddVisionForm from './view_tree/AddVisionForm';
 import AddNodeForm from './view_tree/AddNodeForm';
 import FormModal from './view_tree/FormModal';
+import Tree from './view_tree/Tree';
 
 export class App extends Component {
   constructor(props) {
@@ -54,7 +54,7 @@ export class App extends Component {
 
   getNodeWithId = (nodeId) => {
     let node = this.props.tree.filter((node) => {
-        return node.id === nodeId;
+      return node.id === nodeId;
     });
     return node[0];
   }
@@ -73,20 +73,13 @@ export class App extends Component {
         <button onClick={this.createTree}>Add a goal</button>
       </div>
     );
-    let treeVis = (
-      <TreeVis
-        nodes={this.props.tree}
-        onNodeSelect={this.onNodeSelected}
-        onNodeDoubleClick={this.toggleAddNodeDialog}
-      />
-    );
-    let selectedNode = this.getNodeWithId(this.props.selectedNodeId); 
+    let selectedNode = this.getNodeWithId(this.props.selectedNodeId);
     let addNodeModal = (
       <FormModal
         title={selectedNode ? `Add to ${selectedNode.title}` : "Set a goal"}
         onClose={this.toggleAddNodeDialog}
         onSubmit={this.addNode} >
-        <AddNodeForm/>
+        <AddNodeForm />
       </FormModal>
     );
     let setVisionModal = (
@@ -94,16 +87,25 @@ export class App extends Component {
         title="Vision Statement"
         onSubmit={this.setVision}
         onClose={this.toggleSetVisionDialog} >
-        <AddVisionForm/>
-      </FormModal> 
+        <AddVisionForm />
+      </FormModal>
+    );
+    let treeComponent = (
+      <Tree
+        width={window.innerWidth}
+        height={window.innerHeight}
+        tree={this.props.tree}
+        onNodeSelect={this.onNodeSelected}
+        onNodeDoubleClick={this.toggleAddNodeDialog}
+      />
     );
 
     return (
       <div>
-        { this.props.visionStatement.length === 0 ? createVisionButton : visionStatementHeader }
-        { this.props.tree.length === 0 ? createTreeButton : treeVis }
-        { this.state.showAddNodeDialog ? addNodeModal : null }
-        { this.state.showAddVisionDialog ? setVisionModal : null }
+        {this.props.visionStatement.length === 0 ? createVisionButton : visionStatementHeader}
+        {this.props.tree.length === 0 ? createTreeButton : treeComponent}
+        {this.state.showAddNodeDialog ? addNodeModal : null}
+        {this.state.showAddVisionDialog ? setVisionModal : null}
       </div>
     );
   }
