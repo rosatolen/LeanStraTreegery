@@ -1,36 +1,54 @@
-import React from 'react';
+import React, { Component } from 'react';
 import * as d3 from 'd3';
-
 import TreeNode from './TreeNode';
 
-let Tree = (props) => {
+class Tree extends Component {
 
-  let nodeHeight = 100;
-  let nodeWidth = 200;
-  let hierarchyData = d3.stratify().id(datum => datum.id).parentId(datum => datum.parentID)(props.tree);
-  let treeData = d3.tree().size([props.width, props.height - nodeHeight])(hierarchyData);
+  constructor(props) {
+    super(props);
+    this.nodeHeight = 100;
+    this.nodeWidth = 200;
+    this.state = {
+      treeData: this.convertNodesToTree(props.tree)
+    };
+  }
 
-  let onNodeDoubleClick = (nodeData) => {
-    props.onNodeSelect(nodeData.id);
-    props.onNodeDoubleClick();
+  componentWillReceiveProps = (nextProps) => {
+    if (nextProps.tree.toString() !== this.props.tree.toString()) {
+      this.setState({
+        treeData: this.convertNodesToTree(nextProps.tree)
+      });
+    }
   };
 
-  let inflateNodes = (nodes) => {
+  convertNodesToTree = (nodes) => {
+    let hierarchyData = d3.stratify().id(datum => datum.id).parentId(datum => datum.parentID)(nodes);
+    let treeRoot = d3.tree().size([this.props.width, this.props.height - this.nodeHeight])(hierarchyData);
+    return treeRoot;
+  };
+
+  onNodeDoubleClick = (nodeData) => {
+    this.props.onNodeSelect(nodeData.id);
+    this.props.onNodeDoubleClick();
+  };
+
+  inflateNodes = () => {
+    let nodes = this.state.treeData.descendants();
     return nodes.map(node => {
       return (
         <TreeNode
           key={node.data.title}
-          width={nodeWidth}
-          height={nodeHeight}
+          width={this.nodeWidth}
+          height={this.nodeHeight}
           data={node}
-          doubleClickListener={onNodeDoubleClick}
+          doubleClickListener={this.onNodeDoubleClick}
         />
       );
     });
   };
 
-  let createNodeLinks = () => {
-    let links = treeData.links();
+  createNodeLinks = () => {
+    let links = this.state.treeData.links();
 
     return links.map(link => {
       let source = link.source;
@@ -44,14 +62,16 @@ let Tree = (props) => {
     });
   };
 
-  return (
-    <div>
-      <svg width={props.width} height={props.height}>
-        {createNodeLinks(props.tree)}
-        {inflateNodes(treeData.descendants())}
-      </svg>
-    </div>
-  );
+  render = () => {
+    return (
+      <div>
+        <svg width={this.props.width} height={this.props.height}>
+          {this.createNodeLinks()}
+          {this.inflateNodes()}
+        </svg>
+      </div>
+    );
+  }
 };
 
 export default Tree;
