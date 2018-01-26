@@ -62,12 +62,29 @@ class Tree extends Component {
     });
   };
 
+  addZoomTransform = (element) => {
+    let zoomAndTranslate = () => {
+      d3.select('g#svgContents')
+        .attr('transform', d3.event.transform);
+    }
+    let zoomTranslate = d3.zoom()
+      .filter(() => {
+        return d3.event.type !== 'dblclick';
+      })
+      .on('zoom', zoomAndTranslate);
+
+    d3.select(element).call(zoomTranslate)
+    d3.selectAll(TreeNode).call(zoomTranslate)
+  }
+
   render = () => {
     return (
       <div>
-        <svg width={this.props.width} height={this.props.height}>
-          {this.createNodeLinks()}
-          {this.inflateNodes()}
+        <svg width={this.props.width} height={this.props.height} ref={this.addZoomTransform}>
+          <g id="svgContents">
+            {this.createNodeLinks()}
+            {this.inflateNodes()}
+          </g>
         </svg>
       </div>
     );

@@ -81,14 +81,10 @@
 }
 
 .tree_node .title {
-  line-height: 1.5em;
-  width: inherit;
-  height: 3em;
   font-weight: bold;
   text-align: center;
   padding-top: 10px;
   overflow: hidden;
   text-overflow: ellipsis;
-  position: relative;
   white-space: nowrap;
 }
