@@ -73,3 +73,18 @@
   background-color: rgb(8, 241, 8);
   margin: 5px 0px;
 }
+
+.tree_node rect {
+  stroke: black;
+  stroke-width: 1;
+  fill: white;
+}
+
+.tree_node .title {
+  font-weight: bold;
+  text-align: center;
+  padding-top: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

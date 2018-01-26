@@ -1,6 +1,6 @@
 {
     "nextNodeID": 1,
-    "selectedNodeID": -1,
+    "selectedNodeID": null,
     "visionStatement": "",
     "nodes": []
 }
