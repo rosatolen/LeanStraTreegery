@@ -87,4 +87,66 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  line-height: 1em;
+}
+.description {
+  width: inherit;
+  height: 3em;
+  overflow: hidden;
+}
+.description:before {
+	float: left;
+  width: 5px;
+  height: 100%; 
+  content: "";
+}
+.description :first-child {
+	float: right;
+  width: 100%;
+  margin-left: -5px;
+  line-height: 1em;
+}
+.description:after {
+  box-sizing: content-box;
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+  float:right;
+	position: relative;
+  width: 3em;
+  /* margin-left: calc(-3em + 1px); */
+  margin-left: -3em;
+  padding-right: 5px;
+	top: -1em;
+	left: 100%;
+  font-size: 13px;
+  text-align: right;
+  content: "\02026";
+
+  background-size: 100% 100%;
+  /* 512x1 image, gradient for IE9. Transparent at 0% -> white at 50% -> white at 100%.*/
+  background: -webkit-gradient(linear, left top, right top,
+		from(rgba(255, 255, 255, 0)), to(white), color-stop(50%, white));
+	background: -moz-linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white);			
+	background: -o-linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white);
+	background: -ms-linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white);
+	background: linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white);
+}
+
+.svg_description {
+  margin-left: 3px;
+  line-height: 1em;
+  height: 3em;
+  overflow: hidden;
+}
+.svg_ellipse {
+  float:right;
+	position: relative;
+  background-size: 100% 100%;
+  /* 512x1 image, gradient for IE9. Transparent at 0% -> white at 50% -> white at 100%.*/
+  background: -webkit-gradient(linear, left top, right top,
+		from(rgba(255, 255, 255, 0)), to(red), color-stop(50%, white));
+	background: -moz-linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white);			
+	background: -o-linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white);
+	background: -ms-linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white);
+	background: linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white);
 }
