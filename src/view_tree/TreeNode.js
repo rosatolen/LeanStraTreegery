@@ -6,16 +6,25 @@ class TreeNode extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      truncate: false,
+      truncateTitle: false,
+      truncateDescription: false,
       nodeData: props.data
     }
   }
 
-  checkForTruncate = (element) => {
+  checkTitleForTruncate = (element) => {
+    let emsInPx = parseFloat(getComputedStyle(element).fontSize);
+    let shouldTruncate = element.clientHeight > 2 * emsInPx;
+    this.setState({
+      truncateTitle: shouldTruncate
+    });
+  }
+
+  checkDescriptionForTruncate = (element) => {
     let emsInPx = parseFloat(getComputedStyle(element).fontSize);
     let shouldTruncate = element.clientHeight > 3 * emsInPx;
     this.setState({
-      truncate: shouldTruncate
+      truncateDescription: shouldTruncate
     });
   }
 
@@ -27,11 +36,11 @@ class TreeNode extends Component {
     }
   }
 
-  render = () => {
-    let ellipseSvg = (
+  createEllipseSvg = (yPos) => {
+    return (
       <svg
         width={'2em'} height={'1em'}
-        x={175} y={'3.5em'} >
+        x={'87.5%'} y={yPos} >
         <defs>
           <linearGradient id='white_fade' >
             <stop offset='0%' stopColor='white' stopOpacity='0' />
@@ -45,6 +54,11 @@ class TreeNode extends Component {
         </text>
       </svg>
     );
+  }
+
+  render = () => {
+    let titleEllipse = this.createEllipseSvg('1em');
+    let ellipseSvg = this.createEllipseSvg('4.5em');
     return (
       <svg width={this.props.width} height={this.props.height}
         x={this.state.nodeData.x - this.props.width / 2} y={this.state.nodeData.y}
@@ -52,18 +66,23 @@ class TreeNode extends Component {
         className={'tree_node'}
       >
         <rect width={this.props.width} height={this.props.height} x={0} y={0} className='background_rect' />
-        <svg width={this.props.width} height={this.props.height} x={0} y={0} >
-          <text height='1em' y='1em' className={'title'} >
-            {this.state.nodeData.data.title}
-          </text>
-          <foreignObject width={this.props.width} height={'3em'} y={'1.5em'} >
+        <svg width={this.props.width} height={this.props.height} x={0} y={'.5em'} >
+          <foreignObject width={this.props.width} height={'2em'} >
+            <div className='title'>
+              <div ref={this.checkTitleForTruncate}>
+                {this.state.nodeData.data.title}
+              </div>
+            </div>
+          </foreignObject>
+          {this.state.truncateTitle ? titleEllipse : null}
+          <foreignObject width={this.props.width} height={'3em'} y={'2.5em'} >
             <div className='svg_description'>
-              <div ref={this.checkForTruncate}>
+              <div ref={this.checkDescriptionForTruncate}>
                 {this.state.nodeData.data.description}
               </div>
             </div>
           </foreignObject>
-          {this.state.truncate ? ellipseSvg : null}
+          {this.state.truncateDescription ? ellipseSvg : null}
         </svg>
         <rect width={this.props.width} height={this.props.height} x={0} y={0} className='bounding_rect' />
       </svg>

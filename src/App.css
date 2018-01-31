@@ -74,6 +74,10 @@
   margin: 5px 0px;
 }
 
+.tree_node {
+  padding-top: 2px;
+}
+
 .tree_node .background_rect {
   stroke: none;
   fill: white;
@@ -88,11 +92,9 @@
 .tree_node .title {
   font-weight: bold;
   text-align: center;
-  padding-top: 10px;
   overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
   line-height: 1em;
+  height: 2em;
 }
 
 .tree_node .svg_description {
