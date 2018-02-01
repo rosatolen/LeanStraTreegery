@@ -70,7 +70,7 @@ class Tree extends Component {
     }
     let zoomTranslate = d3.zoom()
       .filter(() => {
-        return d3.event.type !== 'dblclick';
+        return d3.event.type !== 'dblclick' && d3.event.target.nodeName.toUpperCase() !== 'DIV';
       })
       .on('zoom', zoomAndTranslate);
 
