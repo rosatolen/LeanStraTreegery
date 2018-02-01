@@ -60,7 +60,7 @@ export class App extends Component {
   }
 
   render() {
-    let visionStatementHeader = <h1>{this.props.visionStatement}</h1>;
+    let visionStatementHeader = <h1 className={'vision_statement'}>{this.props.visionStatement}</h1>;
     let createVisionButton = (
       <div>
         <div> Let's start by adding a vision statement </div>
