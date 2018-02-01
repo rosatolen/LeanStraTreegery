@@ -74,17 +74,32 @@
   margin: 5px 0px;
 }
 
-.tree_node rect {
+.tree_node {
+  padding-top: 2px;
+}
+
+.tree_node .background_rect {
+  stroke: none;
+  fill: white;
+}
+
+.tree_node .bounding_rect {
   stroke: black;
   stroke-width: 1;
-  fill: white;
+  fill: none;
 }
 
 .tree_node .title {
   font-weight: bold;
   text-align: center;
-  padding-top: 10px;
   overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  line-height: 1em;
+  height: 2em;
+}
+
+.tree_node .svg_description {
+  margin-left: 3px;
+  line-height: 1em;
+  height: 3em;
+  overflow: hidden;
 }
