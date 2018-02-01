@@ -40,7 +40,7 @@ class TreeNode extends Component {
     return (
       <svg
         width={'2em'} height={'1em'}
-        x={'87.5%'} y={yPos} >
+        x={'87.5%'} y={yPos} className='truncation'>
         <defs>
           <linearGradient id='white_fade' >
             <stop offset='0%' stopColor='white' stopOpacity='0' />
