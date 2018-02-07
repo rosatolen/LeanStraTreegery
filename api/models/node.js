@@ -1,7 +1,7 @@
-let mongoose     = require('mongoose');
-let Schema       = mongoose.Schema;
+let mongoose = require('mongoose');
+let Schema = mongoose.Schema;
 
-let NodeSchema   = new Schema({
+let NodeSchema = new Schema({
   id: Number,
   title: String,
   description: String,
