@@ -31,3 +31,12 @@ This library has a *steep* learning curve, and many of the resources and example
 [Interactive Applications with React & D3](https://medium.com/@Elijah_Meeks/interactive-applications-with-react-d3-f76f7b3ebc71)
 
 [Building D3 Components with React](https://hackernoon.com/building-d3-components-with-react-7510e4743288)
+
+## Backend
+This is a work in progress. A very simple NodeJS server is used to host the app locally, and also to host a simple API.
+
+The API provides basic CRUD endpoints for nodes, and uses [MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/) to store them.
+
+### Backend Libraries:
+- [Express](https://expressjs.com/)
+- [Mongoose](http://mongoosejs.com/)
