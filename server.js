@@ -2,7 +2,6 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const TreeNode = require('./api/models/node');
 const apiRouter = require('./api/apiRouter');
 
 const dbConnectString = process.env.CONN_STRING || 'mongodb://localhost:27017/LeanStratreegery';
